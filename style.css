@@ -149,34 +149,12 @@ footer {
   color: white;
 }
 
-/* Animacja ekranu ładowania */
-.loader {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.7);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 10000;
-  animation: loaderAnimation 2s infinite;
+/* Zwiększenie odległości nawigacji od tekstu */
+.section {
+  padding-top: 120px;
 }
 
-@keyframes loaderAnimation {
-  0% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-
-/* Stylowanie komórek gry Snake */
+/* Animacja na hover nad komórkami gry Snake */
 #game-container {
   display: grid;
   grid-template-columns: repeat(16, 20px);
