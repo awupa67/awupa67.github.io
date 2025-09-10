@@ -83,3 +83,8 @@
     opacity: 1;
   }
 }
+/* Efekt kliknięcia liczby - powiększenie */
+.number.clicked {
+  transform: scale(1.5);
+  transition: transform 0.2s ease;
+}
