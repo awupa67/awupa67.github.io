@@ -15,12 +15,6 @@ sections.forEach(section => {
   observer.observe(section);
 });
 
-// Usuwanie ekranu ładowania po załadowaniu strony
-window.onload = () => {
-  const loader = document.querySelector('.loader');
-  loader.style.display = 'none';
-};
-
 // Funkcje gry Snake pozostają takie same
 const gameContainer = document.getElementById('game-container');
 const scoreDisplay = document.getElementById('score');
