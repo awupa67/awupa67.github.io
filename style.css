@@ -1,111 +1,30 @@
-/* Resetowanie stylów */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-/* Tło i ogólne style strony */
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  line-height: 1.6;
-  background-color: #f4f4f4;
-  color: #333;
-  scroll-behavior: smooth;
-}
-
-/* Styl nagłówka */
-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background: rgba(0, 0, 0, 0.7);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
-  padding: 1rem 0;
-}
-
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  padding: 1rem 2rem;
-  max-width: 1200px;
-  margin: auto;
-}
-
-.logo {
-  font-weight: bold;
-  font-size: 1.2rem;
-  color: white;
-}
-
-.nav-links {
-  list-style: none;
-  display: flex;
-  gap: 1.5rem;
-}
-
-.nav-links a {
-  text-decoration: none;
-  color: white;
-  font-weight: 500;
-  position: relative;
-}
-
-.nav-links a::after {
-  content: '';
-  display: block;
-  height: 2px;
-  width: 0;
-  background: #ff0000;
-  transition: 0.3s;
-  position: absolute;
-  bottom: -5px;
-  left: 0;
-}
-
-.nav-links a:hover::after {
-  width: 100%;
-}
-
-/* Sekcja z paralaksą */
-.parallax {
-  background: linear-gradient(45deg, rgba(255, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-              url('https://source.unsplash.com/1600x900/?nature,water') no-repeat center center/cover;
-  background-size: cover;
-  height: 100vh;
-  color: white;
+/* Styl dla gigantycznego napisu */
+#giant-text {
   text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  animation: parallaxBackground 10s infinite alternate;
+  margin: 100px 0;
 }
 
-@keyframes parallaxBackground {
-  0% {
-    background-position: 0% 0%;
-  }
-  100% {
-    background-position: 100% 100%;
-  }
+.giant-text {
+  font-size: 15rem;
+  color: #ff0000; /* Czerwony kolor */
+  font-weight: bold;
+  text-transform: uppercase;
+  animation: pulse 2s infinite; /* Animacja pulsowania */
 }
 
-/* Animacja przycisku na stronie powitalnej */
-.parallax h1 {
-  font-size: 3rem;
-  animation: pulse 2s infinite;
+.number {
+  display: inline-block;
+  transition: transform 0.3s ease, color 0.3s ease;
 }
 
+/* Animacja pulsowania dla całego napisu */
 @keyframes pulse {
   0% {
     transform: scale(1);
     opacity: 1;
   }
   50% {
-    transform: scale(1.1);
+    transform: scale(1.2);
     opacity: 0.8;
   }
   100% {
@@ -114,63 +33,53 @@ header {
   }
 }
 
-/* Animacje tła sekcji O nas */
-#about {
-  background: linear-gradient(120deg, #000000, #8e0000);
-  padding: 80px 20px;
-  color: white;
-  transition: background 1s ease-in-out;
+/* Efekt najechania na pojedyncze liczby */
+.number:hover {
+  animation: scaleUp 0.5s ease forwards, colorChange 0.5s ease forwards;
 }
 
-#about:hover {
-  background: linear-gradient(120deg, #8e0000, #000000);
+/* Animacja powiększania liczby */
+@keyframes scaleUp {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.5);
+  }
 }
 
-/* Animacja fade-in sekcji */
-.section {
-  padding: 100px 20px;
-  max-width: 1000px;
-  margin: auto;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: all 0.6s ease-in-out;
+/* Animacja zmiany kolorów */
+@keyframes colorChange {
+  0% {
+    color: #ff0000;
+  }
+  25% {
+    color: #00ff00; /* Zielony */
+  }
+  50% {
+    color: #0000ff; /* Niebieski */
+  }
+  75% {
+    color: #ff00ff; /* Fioletowy */
+  }
+  100% {
+    color: #ff0000; /* Czerwony */
+  }
 }
 
-.section.fade-in.visible {
-  opacity: 1;
-  transform: translateY(0);
+/* Dodanie efektu kliknięcia */
+.number:active {
+  animation: clickEffect 0.2s ease forwards;
 }
 
-/* Sekcja stopki */
-footer {
-  text-align: center;
-  padding: 2rem;
-  background: #222;
-  color: white;
-}
-
-/* Zwiększenie odległości nawigacji od tekstu */
-.section {
-  padding-top: 120px;
-}
-
-/* Animacja na hover nad komórkami gry Snake */
-#game-container {
-  display: grid;
-  grid-template-columns: repeat(16, 20px);
-  grid-template-rows: repeat(16, 20px);
-  background-color: #000;
-  border: 2px solid #ff0000;
-  margin: 0 auto;
-}
-
-.cell {
-  width: 20px;
-  height: 20px;
-  background-color: #000;
-  border: 1px solid #333;
-}
-
-.cell:hover {
-  background-color: #444;
+/* Efekt po kliknięciu na liczbę */
+@keyframes clickEffect {
+  0% {
+    transform: scale(1.5);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
