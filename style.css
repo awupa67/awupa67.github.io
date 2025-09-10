@@ -7,17 +7,18 @@
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   line-height: 1.6;
-  background-color: #f4f4f4;
-  color: #333;
+  background-color: #121212;
+  color: #fff;
   scroll-behavior: smooth;
 }
 
 header {
   position: fixed;
   width: 100%;
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.1);
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   z-index: 1000;
+  border-bottom: 2px solid rgb(255, 0, 0);
 }
 
 .navbar {
@@ -31,6 +32,7 @@ header {
 .logo {
   font-weight: bold;
   font-size: 1.2rem;
+  color: #ff0000;
 }
 
 .nav-links {
@@ -41,7 +43,7 @@ header {
 
 .nav-links a {
   text-decoration: none;
-  color: #333;
+  color: #fff;
   font-weight: 500;
   position: relative;
 }
@@ -51,7 +53,7 @@ header {
   display: block;
   height: 2px;
   width: 0;
-  background: #3498db;
+  background: #ff0000;
   transition: 0.3s;
   position: absolute;
   bottom: -5px;
@@ -105,4 +107,40 @@ footer {
   padding: 2rem;
   background: #222;
   color: white;
+}
+
+.game-section {
+  background-color: #333;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+#game-container {
+  background-color: black;
+  width: 320px;
+  height: 320px;
+  margin: auto;
+  border: 2px solid rgb(255, 0, 0);
+  position: relative;
+}
+
+#score {
+  font-size: 1.2rem;
+  color: #ff0000;
+  margin-top: 10px;
+}
+
+/* Animacja zmieniającego się RGB */
+@keyframes rgb-change {
+  0% { border-color: rgb(255, 0, 0); }
+  25% { border-color: rgb(0, 255, 0); }
+  50% { border-color: rgb(0, 0, 255); }
+  75% { border-color: rgb(255, 255, 0); }
+  100% { border-color: rgb(255, 0, 0); }
+}
+
+.navbar {
+  animation: rgb-change 5s infinite;
 }
