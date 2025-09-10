@@ -144,3 +144,23 @@ footer {
 .navbar {
   animation: rgb-change 5s infinite;
 }
+/* CSS dla gry Snake */
+#game-container {
+  display: grid;
+  grid-template-columns: repeat(16, 20px);
+  grid-template-rows: repeat(16, 20px);
+  background-color: #000;
+  border: 2px solid #ff0000;
+  margin: 0 auto;
+}
+
+.cell {
+  width: 20px;
+  height: 20px;
+  background-color: #000;
+  border: 1px solid #333;
+}
+
+.cell:hover {
+  background-color: #444;
+}
