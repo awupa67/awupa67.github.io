@@ -1,1 +1,67 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Przykłady z if i else w JS</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        .output {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Sprawdzanie Liczby w JavaScript</h1>
+
+    <label for="numberInput">Podaj liczbę: </label>
+    <input type="number" id="numberInput">
+    <button onclick="checkNumber()">Sprawdź</button>
+
+    <div class="output" id="output"></div>
+
+    <script>
+        function checkNumber() {
+            var n = document.getElementById("numberInput").value;
+            var output = document.getElementById("output");
+
+            n = parseInt(n);  // Zamiana na liczbę całkowitą
+
+            // Przykład 1: Podstawowy if-else z blokami {}
+            if (n > 0) {
+                output.textContent = "Liczba jest dodatnia";
+            } else {
+                output.textContent = "Liczba nie jest dodatnia";
+            }
+
+            // Przykład 2: Zastosowanie elif z wieloma blokami
+            if (n > 0) {
+                output.textContent = "Liczba jest dodatnia";
+            } else if (n == 0) {
+                output.textContent = "Liczba to zero";
+            } else {
+                output.textContent = "Liczba jest ujemna";
+            }
+
+            // Przykład 3: Blok kodu z kilkoma warunkami
+            if (n > 0) {
+                output.textContent = "Liczba jest dodatnia";
+            }
+            if (n == 0) {
+                output.textContent = "Liczba to zero";
+            }
+            if (n < 0) {
+                output.textContent = "Liczba jest ujemna";
+            }
+        }
+    </script>
+
+</body>
+</html>
 
