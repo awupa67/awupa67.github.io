@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Średnia liczb - przykład JavaScript</title>
+    <style>
+        #definition {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #eef;
+            border: 1px solid #99c;
+            max-width: 600px;
+            font-family: Arial, sans-serif;
+        }
+        pre {
+            background-color: #ddf;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+        code {
+            font-family: Consolas, monospace;
+            color: #003366;
+        }
+    </style>
+</head>
+<body>
+    <h1>Oblicz średnią liczb</h1>
+    <p>Wpisz liczby oddzielone przecinkami:</p>
+    <input type="text" id="numbersInput" placeholder="np. 10, 20.5, 30, 40" size="40" />
+    <br /><br />
+    <button onclick="calculateAverage()">Oblicz średnią</button>
+    <p id="result"></p>
+
+    <div id="definition">
+        <h2>Definicja składni funkcji w JavaScript</h2>
+        <p>Funkcja w JavaScript składa się z kilku elementów:</p>
+        <ul>
+            <li><strong>słowo kluczowe <code>function</code></strong> – sygnalizuje definicję funkcji.</li>
+            <li><strong>nazwa funkcji</strong> – unikalna nazwa, pod którą możemy wywołać funkcję.</li>
+            <li><strong>lista argumentów</strong> w nawiasach okrągłych <code>()</code> – może być pusta lub zawierać parametry rozdzielone przecinkami, np. <code>(a, b, c)</code>.</li>
+            <li><strong>implementacja (ciało funkcji)</strong> – kod umieszczony w nawiasach klamrowych <code>{ ... }</code>, który wykonuje zadania funkcji.</li>
+        </ul>
+
+        <p>Ogólny wzór funkcji:</p>
+        <pre><code>function nazwaFunkcji(param1, param2, ...) {
+    // implementacja – kod do wykonania
+}</code></pre>
+
+        <p>Przykład z naszej strony:</p>
+        <pre><code>function calculateAverage() {
+    // tutaj obliczamy średnią podanych liczb
+}</code></pre>
+
+        <p>
+            Funkcje pozwalają na organizację kodu w bloki, które można wywoływać wielokrotnie, co ułatwia zarządzanie i ponowne użycie kodu.
+        </p>
+    </div>
+
+    <script>
+        function calculateAverage() {
+            const input = document.getElementById('numbersInput').value;
+            // Dzielimy wpisany ciąg na elementy po przecinku
+            const parts = input.split(',');
+
+            let sum = 0;
+            let count = 0;
+
+            parts.forEach(part => {
+                // Usuwamy spacje
+                const trimmed = part.trim();
+
+                // Próbujemy parsować różnymi metodami:
+                // Najpierw parseInt, jeśli nie jest liczbą to parseFloat, potem Number
+                let num = parseInt(trimmed);
+                if (isNaN(num)) {
+                    num = parseFloat(trimmed);
+                }
+                if (isNaN(num)) {
+                    num = Number(trimmed);
+                }
+
+                // Sprawdzamy, czy to liczba
+                if (!isNaN(num)) {
+                    sum += num;
+                    count++;
+                }
+            });
+
+            const resultElement = document.getElementById('result');
+
+            if (count === 0) {
+                resultElement.textContent = 'Nie wpisano żadnych poprawnych liczb.';
+            } else {
+                const average = sum / count;
+                resultElement.textContent = `Średnia z ${count} liczb wynosi: ${average.toFixed(2)}`;
+            }
+        }
+    </script>
+</body>
+</html>
+
