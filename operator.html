@@ -1,183 +1,309 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="UTF-8" />
-  <title>Operatory w JavaScript - dynamiczne wyniki</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      margin: 20px;
-      background: #1e1e2f;
-      color: #e0e0e0;
-    }
-    .input-group {
-      max-width: 150px;
-      margin: 0 auto 20px auto;
-      text-align: center;
-    }
-    label {
-      display: block;
-      margin-bottom: 8px;
-      font-weight: 600;
-      color: #a0c4ff;
-    }
-    input {
-      padding: 8px 12px;
-      font-size: 1.1em;
-      width: 120px;
-      border: none;
-      border-radius: 6px;
-      box-shadow: inset 2px 2px 5px #0a0a14, inset -2px -2px 5px #33334f;
-      background: #2a2a45;
-      color: #e0e0e0;
-      transition: background 0.3s ease;
-    }
-    input:focus {
-      background: #3950ff;
-      color: white;
-      outline: none;
-      box-shadow: 0 0 8px #74a9ff;
-    }
-    h1 {
-      margin-bottom: 30px;
-      color: #74a9ff;
-      text-shadow: 0 0 8px #74a9ff;
-      text-align: center;
-    }
-    .section {
-      background: #2c2c4a;
-      padding: 20px 25px;
-      margin-bottom: 25px;
-      border-radius: 12px;
-      box-shadow: 0 0 15px #0d57ff55;
-      transition: box-shadow 0.3s ease;
-    }
-    .section:hover {
-      box-shadow: 0 0 25px #0d57ffaa;
-    }
-    .section h2 {
-      margin-top: 0;
-      margin-bottom: 15px;
-      color: #a0c4ff;
-      border-bottom: 2px solid #4a6eff;
-      padding-bottom: 6px;
-      text-shadow: 0 0 5px #4a6effaa;
-    }
-    .result {
-      margin-left: 10px;
-      line-height: 1.5;
-      font-family: 'Courier New', Courier, monospace;
-      font-size: 1.05em;
-      color: #c9d1ff;
-    }
-    b {
-      color: #ff6f91;
-    }
-  </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Operatory w PHP - Interaktywnie</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #2a2b3c;
+            color: #f1f1f1;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1, h2 {
+            color: #fff;
+        }
+
+        .section {
+            margin-bottom: 30px;
+        }
+
+        .toggle-button {
+            background: #3b67a2;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 24px;
+            cursor: pointer;
+            color: #fff;
+            font-size: 18px;
+            transition: background 0.3s ease;
+        }
+
+        .toggle-button:hover {
+            background: #285285;
+        }
+
+        .toggle-button:active {
+            background: #1f3f6e;
+        }
+
+        .input-container {
+            margin-top: 20px;
+            display: none;
+            background-color: #3c4551;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .input-container input {
+            padding: 10px;
+            width: 80%;
+            font-size: 16px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 1px solid #666;
+            background-color: #fff;
+            color: #333;
+        }
+
+        .input-container button {
+            padding: 10px 20px;
+            background-color: #4caf50;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            color: #fff;
+            font-size: 16px;
+        }
+
+        .input-container button:hover {
+            background-color: #45a049;
+        }
+
+        .output {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 8px;
+            background-color: #444;
+            color: #0ff;
+            font-size: 18px;
+            display: none;
+            white-space: pre-line;
+        }
+    </style>
 </head>
 <body>
 
-<h1>Operatory w JavaScript - dynamiczne wyniki</h1>
+    <h1>Operatory w PHP - Interaktywnie</h1>
 
-<div class="input-group">
-  <label for="x">Wartość x:</label>
-  <input type="number" id="x" value="7" />
-</div>
+    <!-- Operatory Arytmetyczne -->
+    <div class="section">
+        <h2>1. Operatory arytmetyczne</h2>
+        <button class="toggle-button" onclick="toggleInput('arithmetics')">Oblicz sumę i różnicę</button>
+        <div id="arithmetics" class="input-container">
+            <input type="number" id="num1" placeholder="Podaj liczbę A" />
+            <input type="number" id="num2" placeholder="Podaj liczbę B" />
+            <button onclick="calculateArithmetic()">Oblicz</button>
+        </div>
+        <div id="arithmetics-output" class="output"></div>
+    </div>
 
-<div class="input-group">
-  <label for="y">Wartość y:</label>
-  <input type="number" id="y" value="2" />
-</div>
+    <!-- Operatory Porównania -->
+    <div class="section">
+        <h2>2. Operatory porównania</h2>
+        <button class="toggle-button" onclick="toggleInput('comparison')">Porównaj liczby</button>
+        <div id="comparison" class="input-container">
+            <input type="number" id="comp1" placeholder="Podaj liczbę A" />
+            <input type="number" id="comp2" placeholder="Podaj liczbę B" />
+            <button onclick="compareNumbers()">Porównaj</button>
+        </div>
+        <div id="comparison-output" class="output"></div>
+    </div>
 
-<div class="section">
-  <h2>Operatory Arytmetyczne</h2>
-  <div class="result" id="arith"></div>
-</div>
+    <!-- Operatory Logiczne -->
+    <div class="section">
+        <h2>3. Operatory logiczne</h2>
+        <button class="toggle-button" onclick="toggleInput('logical')">Oblicz operacje logiczne</button>
+        <div id="logical" class="input-container">
+            <input type="number" id="lognum1" placeholder="Podaj liczbę A" />
+            <input type="number" id="lognum2" placeholder="Podaj liczbę B" />
+            <button onclick="calculateLogical()">Oblicz</button>
+        </div>
+        <div id="logical-output" class="output"></div>
+    </div>
 
-<div class="section">
-  <h2>Operatory Logiczne</h2>
-  <div class="result" id="logic"></div>
-</div>
+    <!-- Operatory Przypisania -->
+    <div class="section">
+        <h2>4. Operatory przypisania</h2>
+        <button class="toggle-button" onclick="toggleInput('assignment')">Oblicz operacje przypisania</button>
+        <div id="assignment" class="input-container">
+            <input type="number" id="assignnum1" placeholder="Podaj liczbę A" />
+            <button onclick="calculateAssignment()">Oblicz</button>
+        </div>
+        <div id="assignment-output" class="output"></div>
+    </div>
 
-<div class="section">
-  <h2>Operatory Bitowe</h2>
-  <div class="result" id="bitwise"></div>
-</div>
+    <!-- Operatory Inkrementacji / Dekrementacji -->
+    <div class="section">
+        <h2>5. Operatory inkrementacji i dekrementacji</h2>
+        <button class="toggle-button" onclick="toggleInput('increment')">Inkrementuj i dekrementuj</button>
+        <div id="increment" class="input-container">
+            <input type="number" id="incnum" placeholder="Podaj liczbę" />
+            <button onclick="incrementDecrement()">Oblicz</button>
+        </div>
+        <div id="increment-output" class="output"></div>
+    </div>
 
-<div class="section">
-  <h2>Operatory Porównania</h2>
-  <div class="result" id="comparison"></div>
-</div>
+    <!-- Rzutowanie typów -->
+    <div class="section">
+        <h2>6. Operator typu (rzutowanie)</h2>
+        <button class="toggle-button" onclick="toggleInput('typecast')">Rzutuj typ</button>
+        <div id="typecast" class="input-container">
+            <input type="number" id="castnum" placeholder="Podaj liczbę" />
+            <button onclick="typeCast()">Rzutuj</button>
+        </div>
+        <div id="typecast-output" class="output"></div>
+    </div>
 
-<div class="section">
-  <h2>Operatory Łańcuchowe</h2>
-  <div class="result" id="stringOps"></div>
-</div>
+    <script>
+        function toggleInput(id) {
+            const el = document.getElementById(id);
+            if (el.style.display === 'block') {
+                el.style.display = 'none';
+            } else {
+                // Ukryj wszystkie inne input-container, żeby nie było wielu otwartych na raz
+                document.querySelectorAll('.input-container').forEach(c => c.style.display = 'none');
+                el.style.display = 'block';
 
-<script>
-  function updateResults() {
-    const x = Number(document.getElementById('x').value);
-    const y = Number(document.getElementById('y').value);
+                // Ukryj też wszystkie outputy przy zmianie sekcji
+                document.querySelectorAll('.output').forEach(o => o.style.display = 'none');
+            }
+        }
 
-    // Arytmetyczne
-    const arithHtml = `
-      ${x} + ${y} = ${x + y} <br>
-      ${x} - ${y} = ${x - y} <br>
-      ${x} * ${y} = ${x * y} <br>
-      ${x} / ${y} = ${y !== 0 ? (x / y).toFixed(4) : '<b>Błąd: dzielenie przez 0</b>'} <br>
-      ${x} % ${y} = ${y !== 0 ? x % y : '<b>Błąd: dzielenie przez 0</b>'}
-    `;
-    document.getElementById('arith').innerHTML = arithHtml;
+        function calculateArithmetic() {
+            const num1 = parseFloat(document.getElementById('num1').value);
+            const num2 = parseFloat(document.getElementById('num2').value);
+            if (isNaN(num1) || isNaN(num2)) {
+                alert('Proszę wprowadzić poprawne liczby!');
+                return;
+            }
+            const sum = num1 + num2;
+            const difference = num1 - num2;
+            const product = num1 * num2;
+            const quotient = num2 !== 0 ? (num1 / num2).toFixed(2) : 'Nie można dzielić przez zero';
+            const remainder = num2 !== 0 ? (num1 % num2) : 'Nie można dzielić przez zero';
+            const exponentiation = Math.pow(num1, num2);
 
-    // Logiczne (true/false) i XOR logiczny (symulowany)
-    const logicalXor = (!!x !== !!y); // logiczny XOR: true jeśli różne wartości boolean
-    const logicHtml = `
-      ${x} && ${y} = ${!!(x && y)} <br>
-      ${x} || ${y} = ${!!(x || y)} <br>
-      !${x} = ${!x} <br>
-      XOR logiczny (x XOR y) = ${logicalXor}
-    `;
-    document.getElementById('logic').innerHTML = logicHtml;
+            const output = document.getElementById('arithmetics-output');
+            output.style.display = 'block';
+            output.innerText = 
+                `Suma: ${sum}
+Różnica: ${difference}
+Iloczyn: ${product}
+Iloraz: ${quotient}
+Reszta z dzielenia: ${remainder}
+Potęgowanie: ${exponentiation}`;
+        }
 
-    // Bitowe
-    const bitwiseHtml = `
-      ${x} & ${y} = ${x & y} <br>
-      ${x} | ${y} = ${x | y} <br>
-      ~${x} = ${~x} <br>
-      ${x} ^ ${y} (bitowy XOR) = ${x ^ y} <br>
-      ${x} << 1 = ${x << 1} <br>
-      ${x} >> 1 = ${x >> 1}
-    `;
-    document.getElementById('bitwise').innerHTML = bitwiseHtml;
+        function compareNumbers() {
+            const num1 = parseFloat(document.getElementById('comp1').value);
+            const num2 = parseFloat(document.getElementById('comp2').value);
+            if (isNaN(num1) || isNaN(num2)) {
+                alert('Proszę wprowadzić poprawne liczby!');
+                return;
+            }
+            let result = '';
+            result += `Równe (==): ${num1 == num2}\n`;
+            result += `Identyczne (===): ${num1 === num2}\n`;
+            result += `Nierówne (!=): ${num1 != num2}\n`;
+            result += `Nieidentyczne (!==): ${num1 !== num2}\n`;
+            result += `Większe (>): ${num1 > num2}\n`;
+            result += `Mniejsze (<): ${num1 < num2}\n`;
+            result += `Większe lub równe (>=): ${num1 >= num2}\n`;
+            result += `Mniejsze lub równe (<=): ${num1 <= num2}`;
 
-    // Porównania
-    const comparisonHtml = `
-      ${x} == ${y} = ${x == y} <br>
-      ${x} === ${y} = ${x === y} <br>
-      ${x} != ${y} = ${x != y} <br>
-      ${x} !== ${y} = ${x !== y} <br>
-      ${x} > ${y} = ${x > y} <br>
-      ${x} < ${y} = ${x < y} <br>
-      ${x} >= ${y} = ${x >= y} <br>
-      ${x} <= ${y} = ${x <= y}
-    `;
-    document.getElementById('comparison').innerHTML = comparisonHtml;
+            const output = document.getElementById('comparison-output');
+            output.style.display = 'block';
+            output.innerText = result;
+        }
 
-    // Łańcuchowe - działanie na stringach
-    const strX = String(x);
-    const strY = String(y);
-    const stringOpsHtml = `
-      "${strX}" + "${strY}" = "${strX + strY}" <br>
-      "${strX}".repeat(3) = "${strX.repeat(3)}"
-    `;
-    document.getElementById('stringOps').innerHTML = stringOpsHtml;
-  }
+        function calculateLogical() {
+            const num1 = parseFloat(document.getElementById('lognum1').value);
+            const num2 = parseFloat(document.getElementById('lognum2').value);
+            if (isNaN(num1) || isNaN(num2)) {
+                alert('Proszę wprowadzić poprawne liczby!');
+                return;
+            }
 
-  // Inicjalizacja i podpięcie eventów
-  updateResults();
-  document.getElementById('x').addEventListener('input', updateResults);
-  document.getElementById('y').addEventListener('input', updateResults);
-</script>
+            // Przykładowe operacje logiczne jak w PHP (tutaj w JS):
+            const and = (num1 > 5 && num2 < 10);
+            const or = (num1 > 5 || num2 < 10);
+            const not = !(num1 > 5);
+
+            const output = document.getElementById('logical-output');
+            output.style.display = 'block';
+            output.innerText = `AND (num1 > 5 && num2 < 10): ${and}\nOR (num1 > 5 || num2 < 10): ${or}\nNOT (!(num1 > 5)): ${not}`;
+        }
+
+        function calculateAssignment() {
+            let num = parseFloat(document.getElementById('assignnum1').value);
+            if (isNaN(num)) {
+                alert('Proszę wprowadzić poprawną liczbę!');
+                return;
+            }
+
+            let original = num;
+            num += 2;
+            const afterPlus = num;
+            num -= 3;
+            const afterMinus = num;
+            num *= 4;
+            const afterMultiply = num;
+            num /= 2;
+            const afterDivide = num;
+            num %= 3;
+            const afterModulo = num;
+
+            const output = document.getElementById('assignment-output');
+            output.style.display = 'block';
+            output.innerText = 
+                `Pierwotna wartość: ${original}
+Po += 2: ${afterPlus}
+Po -= 3: ${afterMinus}
+Po *= 4: ${afterMultiply}
+Po /= 2: ${afterDivide}
+Po %= 3: ${afterModulo}`;
+        }
+
+        function incrementDecrement() {
+            let num = parseFloat(document.getElementById('incnum').value);
+            if (isNaN(num)) {
+                alert('Proszę wprowadzić poprawną liczbę!');
+                return;
+            }
+            // Inkrementacja i dekrementacja postinkrementacyjna w JS
+            let afterIncrement = num + 1;
+            let afterDecrement = afterIncrement - 1;
+
+            const output = document.getElementById('increment-output');
+            output.style.display = 'block';
+            output.innerText = `Oryginalna wartość: ${num}\nPo inkrementacji (++): ${afterIncrement}\nPo dekrementacji (--): ${afterDecrement}`;
+        }
+
+        function typeCast() {
+            const val = document.getElementById('castnum').value;
+            if (val.trim() === '') {
+                alert('Proszę wprowadzić wartość!');
+                return;
+            }
+
+            // W JS nie ma dokładnego rzutowania jak w PHP, ale można zasymulować:
+            const num = Number(val);
+            const intVal = parseInt(val);
+            const boolVal = Boolean(num);
+
+            const output = document.getElementById('typecast-output');
+            output.style.display = 'block';
+            output.innerText = `Wartość oryginalna: ${val}
+Rzutowanie na int: ${intVal}
+Rzutowanie na bool: ${boolVal}`;
+        }
+    </script>
 
 </body>
 </html>
