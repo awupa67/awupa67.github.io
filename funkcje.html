@@ -1,103 +1,305 @@
 <!DOCTYPE html>
 <html lang="pl">
+
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Średnia liczb - przykład JavaScript</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interaktywne Funkcje JavaScript</title>
+    <link rel="icon" type="image/x-icon" href="../image/icon.png">
+    <link rel="stylesheet" href="../style2.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;400;600&display=swap" rel="stylesheet">
     <style>
-        #definition {
+        /* Globalne style */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #2c2c2c;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            flex-direction: column;
+            color: #f5f5f5;
+            overflow-y: auto;
+        }
+
+        /* Kontener główny */
+        .content {
+            width: 90%;
+            max-width: 1000px;
+            padding: 20px;
+            background-color: #333333;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #4CAF50;
+        }
+
+        h2,
+        h3 {
+            color: #f5f5f5;
+        }
+
+        .nav {
+            color: #4CAF50;
+            text-decoration: none;
+            font-size: 16px;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .nav:hover {
+            text-decoration: underline;
+        }
+
+        /* Area textarea */
+        .area-text {
+            width: 100%;
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid #555;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            min-height: 100px;
+            resize: vertical;
+            background-color: #444;
+            color: #f5f5f5;
+        }
+
+        /* Przycisk */
+        .nav-button {
+            padding: 12px 25px;
+            background-color: #007bff;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .nav-button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Wyniki */
+        .result {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #444;
+            border-radius: 5px;
+            font-size: 16px;
+            color: #f5f5f5;
+            min-height: 30px;
+        }
+
+        /* Stopka */
+        footer {
+            font-size: 12px;
+            color: rgb(180, 180, 180);
+            text-align: center;
             margin-top: 20px;
-            padding: 10px;
-            background-color: #eef;
-            border: 1px solid #99c;
-            max-width: 600px;
-            font-family: Arial, sans-serif;
         }
-        pre {
-            background-color: #ddf;
-            padding: 10px;
-            border-radius: 4px;
-            overflow-x: auto;
+
+        footer a {
+            color: #4CAF50;
         }
-        code {
-            font-family: Consolas, monospace;
-            color: #003366;
+
+        /* Responsywność */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .nav-button {
+                width: 100%;
+                padding: 15px;
+                font-size: 18px;
+            }
+
+            .content {
+                width: 95%;
+                padding: 10px;
+            }
         }
     </style>
 </head>
+
 <body>
-    <h1>Oblicz średnią liczb</h1>
-    <p>Wpisz liczby oddzielone przecinkami:</p>
-    <input type="text" id="numbersInput" placeholder="np. 10, 20.5, 30, 40" size="40" />
-    <br /><br />
-    <button onclick="calculateAverage()">Oblicz średnią</button>
-    <p id="result"></p>
 
-    <div id="definition">
-        <h2>Definicja składni funkcji w JavaScript</h2>
-        <p>Funkcja w JavaScript składa się z kilku elementów:</p>
-        <ul>
-            <li><strong>słowo kluczowe <code>function</code></strong> – sygnalizuje definicję funkcji.</li>
-            <li><strong>nazwa funkcji</strong> – unikalna nazwa, pod którą możemy wywołać funkcję.</li>
-            <li><strong>lista argumentów</strong> w nawiasach okrągłych <code>()</code> – może być pusta lub zawierać parametry rozdzielone przecinkami, np. <code>(a, b, c)</code>.</li>
-            <li><strong>implementacja (ciało funkcji)</strong> – kod umieszczony w nawiasach klamrowych <code>{ ... }</code>, który wykonuje zadania funkcji.</li>
-        </ul>
+    <div class="content">
+        <h1>Interaktywne Funkcje JavaScript</h1>
+        <a href="index.html" class="nav">powrót ;(</a>
+        <hr>
+        <h2>Funkcje</h2>
 
-        <p>Ogólny wzór funkcji:</p>
-        <pre><code>function nazwaFunkcji(param1, param2, ...) {
-    // implementacja – kod do wykonania
-}</code></pre>
+        <!-- Przykłady funkcji -->
+        <h3>1. Prompt + Alert</h3>
+        <textarea class="area-text" rows="10" readonly>
+function examplePrompt() {
+    const name = prompt("Jak masz na imię?");
+    alert("Cześć, " + name + "!");
+}
+        </textarea><br>
+        <button onclick="examplePrompt()" class="nav-button">Sprawdź</button>
+        <div id="result-prompt" class="result"></div>
 
-        <p>Przykład z naszej strony:</p>
-        <pre><code>function calculateAverage() {
-    // tutaj obliczamy średnią podanych liczb
-}</code></pre>
+        <h3>2. Confirm</h3>
+        <textarea class="area-text" rows="10" readonly>
+function exampleConfirm() {
+    const answer = confirm("Czy lubisz JavaScript?");
+    if (answer) {
+        alert("Super, że lubisz JavaScript!");
+    } else {
+        alert("Szkoda, może się przekonasz.");
+    }
+}
+        </textarea><br>
+        <button onclick="exampleConfirm()" class="nav-button">Sprawdź</button>
+        <div id="result-confirm" class="result"></div>
 
-        <p>
-            Funkcje pozwalają na organizację kodu w bloki, które można wywoływać wielokrotnie, co ułatwia zarządzanie i ponowne użycie kodu.
-        </p>
+        <h3>3. ParseInt</h3>
+        <textarea class="area-text" rows="10" readonly>
+function exampleParseInt() {
+    const input = prompt("Podaj liczbę całkowitą:");
+    const number = parseInt(input);
+    alert("Wczytana liczba całkowita to: " + number);
+}
+        </textarea><br>
+        <button onclick="exampleParseInt()" class="nav-button">Sprawdź</button>
+        <div id="result-parseint" class="result"></div>
+
+        <h3>4. ParseFloat</h3>
+        <textarea class="area-text" rows="10" readonly>
+function exampleParseFloat() {
+    const input = prompt("Podaj liczbę zmiennoprzecinkową:");
+    const number = parseFloat(input);
+    alert("Wczytana liczba to: " + number);
+}
+        </textarea><br>
+        <button onclick="exampleParseFloat()" class="nav-button">Sprawdź</button>
+        <div id="result-parsefloat" class="result"></div>
+
+        <h3>5. Number()</h3>
+        <textarea class="area-text" rows="10" readonly>
+function exampleNumber() {
+    const input = prompt("Podaj coś do konwersji na liczbę:");
+    const number = Number(input);
+    alert("Wynik konwersji to: " + number);
+}
+        </textarea><br>
+        <button onclick="exampleNumber()" class="nav-button">Sprawdź</button>
+        <div id="result-number" class="result"></div>
+
+        <h3>6. isNaN</h3>
+        <textarea class="area-text" rows="10" readonly>
+function exampleIsNaN() {
+    const input = prompt("Podaj coś do sprawdzenia czy to liczba:");
+    if (isNaN(input)) {
+        alert("To NIE jest liczba!");
+    } else {
+        alert("To jest liczba.");
+    }
+}
+        </textarea><br>
+        <button onclick="exampleIsNaN()" class="nav-button">Sprawdź</button>
+        <div id="result-isnan" class="result"></div>
+
+        <h3>7. Prosta funkcja sumująca</h3>
+        <textarea class="area-text" rows="10" readonly>
+function exampleSum() {
+    const a = parseFloat(prompt("Podaj pierwszą liczbę:"));
+    const b = parseFloat(prompt("Podaj drugą liczbę:"));
+    if (isNaN(a) || isNaN(b)) {
+        alert("Podano nieprawidłową liczbę.");
+        return;
+    }
+    alert("Suma wynosi: " + (a + b));
+}
+        </textarea><br>
+        <button onclick="exampleSum()" class="nav-button">Sprawdź</button>
+        <div id="result-sum" class="result"></div>
+
+        <!-- DODANE: Sekcja z deklaracją i wyrażeniem funkcyjnym -->
+        <hr>
+        <h2>8. Deklaracja funkcji i wyrażenie funkcyjne</h2>
+        <div style="display: flex; justify-content: center; gap: 20px; margin-top: 15px;">
+            <button id="btnDeclaration" class="nav-button" style="flex: 1; max-width: 200px;">Deklaracja funkcji</button>
+            <button id="btnExpression" class="nav-button" style="flex: 1; max-width: 200px;">Wyrażenie funkcyjne</button>
+        </div>
     </div>
 
     <script>
-        function calculateAverage() {
-            const input = document.getElementById('numbersInput').value;
-            // Dzielimy wpisany ciąg na elementy po przecinku
-            const parts = input.split(',');
-
-            let sum = 0;
-            let count = 0;
-
-            parts.forEach(part => {
-                // Usuwamy spacje
-                const trimmed = part.trim();
-
-                // Próbujemy parsować różnymi metodami:
-                // Najpierw parseInt, jeśli nie jest liczbą to parseFloat, potem Number
-                let num = parseInt(trimmed);
-                if (isNaN(num)) {
-                    num = parseFloat(trimmed);
-                }
-                if (isNaN(num)) {
-                    num = Number(trimmed);
-                }
-
-                // Sprawdzamy, czy to liczba
-                if (!isNaN(num)) {
-                    sum += num;
-                    count++;
-                }
-            });
-
-            const resultElement = document.getElementById('result');
-
-            if (count === 0) {
-                resultElement.textContent = 'Nie wpisano żadnych poprawnych liczb.';
-            } else {
-                const average = sum / count;
-                resultElement.textContent = `Średnia z ${count} liczb wynosi: ${average.toFixed(2)}`;
-            }
+        // Funkcje JavaScript
+        function examplePrompt() {
+            const name = prompt("Jak masz na imię?");
+            document.getElementById('result-prompt').innerText = "Cześć, " + name + "!";
         }
-    </script>
-</body>
-</html>
 
+        function exampleConfirm() {
+            const answer = confirm("Czy lubisz JavaScript?");
+            const result = answer ? "Super, że lubisz JavaScript!" : "Szkoda, może się przekonasz.";
+            document.getElementById('result-confirm').innerText = result;
+        }
+
+        function exampleParseInt() {
+            const input = prompt("Podaj liczbę całkowitą:");
+            const number = parseInt(input);
+            document.getElementById('result-parseint').innerText = "Wczytana liczba całkowita to: " + number;
+        }
+
+        function exampleParseFloat() {
+            const input = prompt("Podaj liczbę zmiennoprzecinkową:");
+            const number = parseFloat(input);
+            document.getElementById('result-parsefloat').innerText = "Wczytana liczba to: " + number;
+        }
+
+        function exampleNumber() {
+            const input = prompt("Podaj coś do konwersji na liczbę:");
+            const number = Number(input);
+            document.getElementById('result-number').innerText = "Wynik konwersji to: " + number;
+        }
+
+        function exampleIsNaN() {
+            const input = prompt("Podaj coś do sprawdzenia czy to liczba:");
+            const result = isNaN(input) ? "To NIE jest liczba!" : "To jest liczba.";
+            document.getElementById('result-isnan').innerText = result;
+        }
+
+        function exampleSum() {
+            const a = parseFloat(prompt("Podaj pierwszą liczbę:"));
+            const b = parseFloat(prompt("Podaj drugą liczbę:"));
+            if (isNaN(a) || isNaN(b)) {
+                document.getElementById('result-sum').innerText = "Podano nieprawidłową liczbę.";
+                return;
+            }
+            document.getElementById('result-sum').innerText = "Suma wynosi: " + (a + b);
+        }
+
+        // Deklaracja funkcji
+        function handleClickDeclaration() {
+            alert("Kliknięto przycisk (deklaracja funkcji)!");
+        }
+
+        // Wyrażenie funkcyjne przypisane do zmiennej
+        const handleClickExpression = function () {
+            alert("Kliknięto przycisk (wyrażenie funkcyjne)!");
+        };
+
+        // Przypisanie eventów do przycisków
+        document.getElementById("btnDeclaration").onclick = handleClickDeclaration;
+        document.getElementById("btnExpression").onclick = handleClickExpression;
+    </script>
+
+</body>
+
+</html>
