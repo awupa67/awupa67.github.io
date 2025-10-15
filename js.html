@@ -1,0 +1,228 @@
+
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>2025/2026</title>
+ <style>
+    html{  
+    text-align:center;
+      color:red;
+      font-size:35px;
+      font-family: "Lato", sans-serif;
+      background-color: #121212; /* bardzo ciemne tło */
+  background-image: repeating-linear-gradient(
+    45deg,                /* kąt pasków */
+    rgba(255, 255, 255, 0.05), /* jasne paski, bardzo subtelne */
+    rgba(255, 255, 255, 0.05) 10px,
+    transparent 10px,
+    transparent 20px
+  );
+  background-repeat: repeat;
+  background-size: 40px 40px; /* rozmiar wzoru */
+  color: white; /* dla czytelności tekstu */
+
+    
+      }
+   
+
+    a{
+      text-decoration:none;
+      color:white;
+      }
+    h1{
+      color:#47d6ca;
+       font-size:54px;
+  
+      }
+   #controlBox {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 140px;
+    background: #000;
+    color: #fff;
+    border-radius: 8px;
+    padding: 10px;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 0 10px rgba(255,255,255,0.3);
+    z-index: 9999;
+    user-select: none;
+  }
+  #controlBox button {
+    width: 100%;
+    margin: 5px 0;
+    padding: 8px;
+    background: #222;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.3s;
+  }
+  #controlBox button:hover {
+    background: #555;
+  }
+  /* Wysoki kontrast */
+  .high-contrast {
+    background-color: #000 !important;
+    color: #fff !important;
+  }
+  .high-contrast a {
+    color: #0ff !important;
+  }
+   h1 {
+      margin-bottom: 5px;
+    }
+    .code {
+      font-family: monospace;
+      background: #222;
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 14px;
+      margin-bottom: 10px;
+      user-select: text;
+    }
+    .output {
+      margin-bottom: 30px;
+      padding-left: 10px;
+      border-left: 3px solid #0ff;
+      .code {
+      font-family: monospace;
+      background: #222;
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 14px;
+      margin-bottom: 10px;
+      user-select: text;
+      white-space: pre-wrap;
+    }
+    
+    button {
+      background: #0ff;
+      border: none;
+      border-radius: 4px;
+      padding: 6px 10px;
+      cursor: pointer;
+      font-weight: bold;
+      color: #000;
+      margin-bottom: 10px;
+    }
+    button:hover {
+      background: #0cc;
+    }
+    </style>
+  
+
+<body>
+  <script>
+  
+  function addExample(title, code, setupFunc, runFunc) {
+    const titleEl = document.createElement('h1');
+    titleEl.textContent = title;
+    document.body.appendChild(titleEl);
+
+    const codeEl = document.createElement('div');
+    codeEl.className = 'code';
+    codeEl.textContent = code;
+    document.body.appendChild(codeEl);
+
+    const outputEl = document.createElement('div');
+    outputEl.className = 'output';
+    document.body.appendChild(outputEl);
+
+    const btn = document.createElement('button');
+    btn.textContent = 'Uruchom przykład';
+    document.body.appendChild(btn);
+
+    // jeśli jest funkcja przygotowująca środowisko, wywołaj ją
+    if (typeof setupFunc === 'function') {
+      setupFunc(outputEl);
+    }
+
+    btn.addEventListener('click', () => {
+      if (typeof runFunc === 'function') {
+        runFunc(outputEl);
+      }
+    });
+  }
+
+  // 1. Alert
+  addExample(
+    "Alert - wyświetla okno z komunikatem",
+    'alert("Coś poszło nie tak")',
+    null,
+    () => alert("Coś poszło nie tak")
+  );
+
+  // 2. Console.log
+  addExample(
+    "Console.log - wypisuje tekst do konsoli",
+    'console.log("To jest komunikat w konsoli.")',
+    (out) => {
+      out.textContent = "Kliknij przycisk, aby zobaczyć komunikat w konsoli przeglądarki.";
+    },
+    () => console.log("To jest komunikat w konsoli.")
+  );
+
+  // 3. Document.write (tu nie używamy prawdziwego document.write, bo nadpisuje stronę)
+  addExample(
+    "Document.write - wstawia HTML do dokumentu",
+    'document.write("<h2>Tekst wstawiony przez document.write()</h2>")',
+    null,
+    (out) => {
+      out.innerHTML = "<h2>Tekst wstawiony przez symulację document.write()</h2>";
+    }
+  );
+
+  // 4. innerHTML
+  addExample(
+    "innerHTML - zwraca zawartość HTML elementu",
+    'element.innerHTML',
+    (out) => {
+      // Tworzymy element na potrzeby przykładu
+      const div = document.createElement('div');
+      div.innerHTML = "<p>Przykładowy <strong>tekst</strong> w divie.</p>";
+      out.appendChild(div);
+
+      // przechowujemy referencję do elementu, żeby można było go użyć w runFunc
+      out._exampleElement = div;
+    },
+    (out) => {
+      const html = out._exampleElement.innerHTML;
+      out.appendChild(document.createElement('br'));
+      const result = document.createElement('div');
+      result.textContent = "innerHTML elementu to: " + html;
+      out.appendChild(result);
+    }
+  );
+
+  // 5. innerText
+  addExample(
+    "innerText - zwraca tekst widoczny (bez tagów HTML)",
+    'element.innerText',
+    (out) => {
+      // Tworzymy element na potrzeby przykładu
+      const div = document.createElement('div');
+      div.innerHTML = "<p>Przykładowy <strong>tekst</strong> w divie.</p>";
+      out.appendChild(div);
+
+      // przechowujemy referencję do elementu
+      out._exampleElement = div;
+    },
+    (out) => {
+      const text = out._exampleElement.innerText;
+      out.appendChild(document.createElement('br'));
+      const result = document.createElement('div');
+      result.textContent = "innerText elementu to: " + text;
+      out.appendChild(result);
+    }
+  );
+
+</script>
+  <br>
+  <br>
+</body>
+</html>
