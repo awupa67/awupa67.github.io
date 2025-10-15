@@ -1,67 +1,279 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Przykłady z if i else w JS</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 20px;
-        }
-        .output {
-            margin-top: 20px;
-            font-weight: bold;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Interaktywne Przykłady JS: if/else, switch, pętle</title>
+  <style>
+    html {
+      text-align: center;
+      font-family: "Lato", sans-serif;
+        font-size:35px;
+      background-color: #121212;
+      background-image: repeating-linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.05),
+        rgba(255, 255, 255, 0.05) 10px,
+        transparent 10px,
+        transparent 20px
+      );
+      background-repeat: repeat;
+      background-size: 40px 40px;
+      color: white;
+      font-size: 20px;
+    }
+
+    a {
+      text-decoration: none;
+      color: white;
+    }
+
+    h1 {
+      font-size: 54px;
+      font-weight: bold;
+    }
+
+    h2 {
+      margin-top: 40px;
+      color: #47d6ca;
+    }
+
+    .example-box {
+      background: #222;
+      border-radius: 8px;
+      padding: 15px;
+      width: 400px;
+      margin: 0 auto 30px auto;
+      box-shadow: 0 0 12px rgba(0, 255, 255, 0.5);
+      text-align: left;
+      font-family: monospace;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+      color: #0ff;
+    }
+
+    input[type="text"], input[type="number"] {
+      width: 100%;
+      padding: 8px;
+      border-radius: 4px;
+      border: 1px solid #0ff;
+      background-color: #121212;
+      color: #0ff;
+      font-family: monospace;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+
+    button {
+      margin-top: 10px;
+      width: 100%;
+      padding: 10px;
+      background: #0ff;
+      border: none;
+      border-radius: 4px;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+      color: #000;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #0cc;
+    }
+
+    pre {
+      background: #000;
+      border: 1px solid #0ff;
+      border-radius: 4px;
+      padding: 10px;
+      margin-top: 12px;
+      min-height: 40px;
+      white-space: pre-wrap;
+      color: #0ff;
+      font-family: monospace;
+      font-size: 16px;
+    }
+
+  </style>
 </head>
 <body>
 
-    <h1>Sprawdzanie Liczby w JavaScript</h1>
+  <h1>Instrukcje Warunkowe i Pętle w JavaScript</h1>
 
-    <label for="numberInput">Podaj liczbę: </label>
-    <input type="number" id="numberInput">
-    <button onclick="checkNumber()">Sprawdź</button>
+  <!-- IF...ELSE -->
+  <h2>1. Instrukcja <code>if...else</code></h2>
+  <div class="example-box">
+    <label>Podaj liczbę (number):</label>
+    <input type="number" id="ifelse-input" placeholder="np. 10, -5, 0" value="10" />
+    <button onclick="runIfElse()">Sprawdź</button>
+    <pre><strong>Komenda:</strong> 
+if (number &gt; 0) { ... } else if (number &lt; 0) { ... } else { ... }</pre>
+    <pre id="ifelse-output">Liczba jest dodatnia.</pre>
+  </div>
 
-    <div class="output" id="output"></div>
+  <!-- SWITCH -->
+  <h2>2. Instrukcja <code>switch</code></h2>
+  <div class="example-box">
+    <label>Podaj dzień tygodnia (1-7):</label>
+    <input type="number" id="switch-input" min="1" max="7" placeholder="np. 3" value="3" />
+    <button onclick="runSwitch()">Sprawdź</button>
+    <pre><strong>Komenda:</strong> 
+switch(day) {
+  case 1: ... break;
+  ...
+  default: ...
+}</pre>
+    <pre id="switch-output">Dzień tygodnia: Środa</pre>
+  </div>
 
-    <script>
-        function checkNumber() {
-            var n = document.getElementById("numberInput").value;
-            var output = document.getElementById("output");
+  <!-- FOR -->
+  <h2>3. Pętla <code>for</code></h2>
+  <div class="example-box">
+    <label>Podaj liczbę końcową pętli (max 100):</label>
+    <input type="number" id="for-input" min="1" max="100" placeholder="np. 5" value="5" />
+    <button onclick="runFor()">Sprawdź</button>
+    <pre><strong>Komenda:</strong> 
+for(let i=1; i&lt;=n; i++) { ... }</pre>
+    <pre id="for-output">Liczba: 1
+Liczba: 2
+Liczba: 3
+Liczba: 4
+Liczba: 5
+</pre>
+  </div>
 
-            n = parseInt(n);  // Zamiana na liczbę całkowitą
+  <!-- WHILE -->
+  <h2>4. Pętla <code>while</code></h2>
+  <div class="example-box">
+    <label>Podaj liczbę końcową pętli (max 100):</label>
+    <input type="number" id="while-input" min="1" max="100" placeholder="np. 5" value="5" />
+    <button onclick="runWhile()">Sprawdź</button>
+    <pre><strong>Komenda:</strong> 
+while(w &lt;= n) { ... }</pre>
+    <pre id="while-output">Iteracja: 1
+Iteracja: 2
+Iteracja: 3
+Iteracja: 4
+Iteracja: 5
+</pre>
+  </div>
 
-            // Przykład 1: Podstawowy if-else z blokami {}
-            if (n > 0) {
-                output.textContent = "Liczba jest dodatnia";
-            } else {
-                output.textContent = "Liczba nie jest dodatnia";
-            }
+  <!-- DO...WHILE -->
+  <h2>5. Pętla <code>do...while</code></h2>
+  <div class="example-box">
+    <label>Podaj liczbę końcową pętli (max 100):</label>
+    <input type="number" id="dowhile-input" min="1" max="100" placeholder="np. 5" value="5" />
+    <button onclick="runDoWhile()">Sprawdź</button>
+    <pre><strong>Komenda:</strong> 
+do { ... } while(d &lt;= n);</pre>
+    <pre id="do-while-output">Licznik: 1
+Licznik: 2
+Licznik: 3
+Licznik: 4
+Licznik: 5
+</pre>
+  </div>
 
-            // Przykład 2: Zastosowanie elif z wieloma blokami
-            if (n > 0) {
-                output.textContent = "Liczba jest dodatnia";
-            } else if (n == 0) {
-                output.textContent = "Liczba to zero";
-            } else {
-                output.textContent = "Liczba jest ujemna";
-            }
+  <script>
+    // Funkcja sprawdzająca if...else
+    function runIfElse() {
+      let number = Number(document.getElementById('ifelse-input').value);
+      let result = '';
+      if (number > 0) {
+        result = "Liczba jest dodatnia.";
+      } else if (number < 0) {
+        result = "Liczba jest ujemna.";
+      } else {
+        result = "Liczba jest równa zero.";
+      }
+      document.getElementById('ifelse-output').textContent = result;
+    }
 
-            // Przykład 3: Blok kodu z kilkoma warunkami
-            if (n > 0) {
-                output.textContent = "Liczba jest dodatnia";
-            }
-            if (n == 0) {
-                output.textContent = "Liczba to zero";
-            }
-            if (n < 0) {
-                output.textContent = "Liczba jest ujemna";
-            }
-        }
-    </script>
+    // Funkcja sprawdzająca switch
+    function runSwitch() {
+      let day = Number(document.getElementById('switch-input').value);
+      let dayName;
+      switch(day) {
+        case 1: dayName = "Poniedziałek"; break;
+        case 2: dayName = "Wtorek"; break;
+        case 3: dayName = "Środa"; break;
+        case 4: dayName = "Czwartek"; break;
+        case 5: dayName = "Piątek"; break;
+        case 6: dayName = "Sobota"; break;
+        case 7: dayName = "Niedziela"; break;
+        default: dayName = "Niepoprawny dzień!";
+      }
+      document.getElementById('switch-output').textContent = "Dzień tygodnia: " + dayName;
+    }
+
+    // Funkcja sprawdzająca pętlę for
+    function runFor() {
+      let n = Number(document.getElementById('for-input').value);
+      if(n > 100) n = 100; // ograniczenie max
+      if(n < 1) n = 1;
+      let result = '';
+      for(let i=1; i<=n; i++) {
+        result += "Liczba: " + i + "\n";
+      }
+      document.getElementById('for-output').textContent = result;
+    }
+
+    // Funkcja sprawdzająca pętlę while
+    function runWhile() {
+      let n = Number(document.getElementById('while-input').value);
+      if(n > 100) n = 100;
+      if(n < 1) n = 1;
+      let w = 1;
+      let result = '';
+      while(w <= n) {
+        result += "Iteracja: " + w + "\n";
+        w++;
+      }
+      document.getElementById('while-output').textContent = result;
+    }
+
+    // Funkcja sprawdzająca pętlę do...while
+    function runDoWhile() {
+      let n = Number(document.getElementById('dowhile-input').value);
+      if(n > 100) n = 100;
+      if(n < 1) n = 1;
+      let d = 1;
+      let result = '';
+      do {
+        result += "Licznik: " + d + "\n";
+        d++;
+      } while(d <= n);
+      document.getElementById('do-while-output').textContent = result;
+    }
+
+    // Uruchamiam domyślne wyniki na starcie
+    runIfElse();
+    runSwitch();
+    runFor();
+    runWhile();
+    runDoWhile();
+
+    // Animacja kolorów h1 (RGB)
+    function animateH1Color() {
+      const h1 = document.querySelector('h1');
+      let r=0, g=0, b=0, step=1;
+      setInterval(() => {
+        r = (r + step) % 256;
+        g = (g + step*2) % 256;
+        b = (b + step*3) % 256;
+        h1.style.color = `rgb(${r}, ${g}, ${b})`;
+      }, 30);
+    }
+    animateH1Color();
+
+  </script>
+  <br>
+  <br>
 
 </body>
 </html>
-
