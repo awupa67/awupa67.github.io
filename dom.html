@@ -1,1 +1,137 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM – Slider, Lightbox, Create/Remove</title>
 
+    <style>
+        body {
+            font-family: Arial;
+            background: #f4f4f4;
+            text-align: center;
+        }
+
+        .slider {
+            width: 400px;
+            margin: 20px auto;
+        }
+
+        .slider img {
+            width: 100%;
+            display: none;
+            cursor: pointer;
+        }
+
+        .slider img.active {
+            display: block;
+        }
+
+        button {
+            margin: 5px;
+            padding: 8px 15px;
+            cursor: pointer;
+        }
+
+        #lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #lightbox img {
+            max-width: 80%;
+            border: 4px solid white;
+        }
+
+        #notes div {
+            background: white;
+            margin: 5px auto;
+            padding: 10px;
+            width: 300px;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>Document Object Model</h1>
+
+<!-- SLIDER -->
+<div class="slider">
+    <img src="https://picsum.photos/400/250?1" class="active">
+    <img src="https://picsum.photos/400/250?2">
+    <img src="https://picsum.photos/400/250?3">
+</div>
+
+<button id="prev">Poprzednie</button>
+<button id="next">Następne</button>
+
+<!-- LIGHTBOX -->
+<div id="lightbox">
+    <img>
+</div>
+
+<hr>
+
+<!-- CREATE / REMOVE -->
+<h2>Tworzenie i usuwanie elementów</h2>
+
+<button id="add">Dodaj element</button>
+<button id="remove">Usuń ostatni</button>
+
+<div id="notes"></div>
+
+<script>
+    /* === SLIDER === */
+    const images = document.querySelectorAll(".slider img");
+    let index = 0;
+
+    document.getElementById("next").addEventListener("click", () => {
+        images[index].classList.remove("active");
+        index = (index + 1) % images.length;
+        images[index].classList.add("active");
+    });
+
+    document.getElementById("prev").addEventListener("click", () => {
+        images[index].classList.remove("active");
+        index = (index - 1 + images.length) % images.length;
+        images[index].classList.add("active");
+    });
+
+    /* === LIGHTBOX === */
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = lightbox.querySelector("img");
+
+    images.forEach(img => {
+        img.addEventListener("click", () => {
+            lightbox.style.display = "flex";
+            lightboxImg.src = img.src;
+        });
+    });
+
+    lightbox.addEventListener("click", () => {
+        lightbox.style.display = "none";
+    });
+
+    /* === CREATE & REMOVE DOM === */
+    const notes = document.getElementById("notes");
+    let counter = 1;
+
+    document.getElementById("add").addEventListener("click", () => {
+        const div = document.createElement("div");
+        div.textContent = "Dynamiczny element nr " + counter++;
+        notes.appendChild(div);
+    });
+
+    document.getElementById("remove").addEventListener("click", () => {
+        if (notes.lastChild) {
+            notes.removeChild(notes.lastChild);
+        }
+    });
+</script>
+
+</body>
+</html>
