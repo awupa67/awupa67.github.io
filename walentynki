@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dla Wiktorii ❤️</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Pacifico&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #fff5f5 0%, #fed7e2 100%);
+            font-family: 'Montserrat', sans-serif;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        #main-card {
+            background: white;
+            padding: 40px;
+            border-radius: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            z-index: 10;
+            max-width: 500px;
+            width: 90%;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+        }
+
+        .black-text { color: black; }
+        .red-text { 
+            color: #e53e3e; 
+            font-family: 'Pacifico', cursive;
+            display: block;
+            font-size: 3.5rem;
+            margin-top: 10px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+            position: relative;
+            height: 60px;
+        }
+
+        button {
+            padding: 15px 35px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.2s;
+            font-weight: bold;
+        }
+
+        #btn-tak {
+            background-color: #f687b3;
+            color: white;
+        }
+
+        #btn-tak:hover {
+            background-color: #ed64a6;
+            transform: scale(1.1);
+        }
+
+        #btn-nie {
+            background-color: #edf2f7;
+            color: #4a5568;
+            position: absolute;
+        }
+
+        /* Widok po kliknięciu TAK */
+        #success-screen {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            z-index: 100;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow-y: auto;
+        }
+
+        .cat-gif {
+            width: 250px;
+            border-radius: 20px;
+            margin: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .heart {
+            position: absolute;
+            color: #f687b3;
+            font-size: 20px;
+            animation: float 3s linear infinite;
+            z-index: 99;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+        }
+
+        .grid-cats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="main-card">
+        <h1>
+            <span class="black-text">Wiktoria, czy zostaniesz mojom</span>
+            <span class="red-text">WALENTYNKOM?</span>
+        </h1>
+        <div class="buttons">
+            <button id="btn-tak" onclick="showLove()">TAK!</button>
+            <button id="btn-nie" onmouseover="moveButton()" onclick="moveButton()">NIE</button>
+        </div>
+    </div>
+
+    <div id="success-screen">
+        <h1 style="color: #ed64a6; font-family: 'Pacifico'; font-size: 3rem;">JEEEEEEJ! ❤️</h1>
+        <p style="font-size: 1.5rem; font-weight: bold;">Wiedziałem!</p>
+        <div class="grid-cats">
+            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJueGZ6bm93YXF6am90YnN6eXh6eXh6eXh6eXh6eXh6eXh6eCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/KzM1lAfJjEhcqA92Tr/giphy.gif" class="cat-gif" alt="Happy cat">
+            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJueGZ6bm93YXF6am90YnN6eXh6eXh6eXh6eXh6eXh6eXh6eCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/MDJ9IbxxvDUQM/giphy.gif" class="cat-gif" alt="Happy cat">
+            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNXJueGZ6bm93YXF6am90YnN6eXh6eXh6eXh6eXh6eXh6eXh6eCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/c6AyRE75O50e4/giphy.gif" class="cat-gif" alt="Happy cat">
+            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNXJueGZ6bm93YXF6am90YnN6eXh6eXh6eXh6eXh6eXh6eXh6eCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/11s7Ke7jkXwnaU/giphy.gif" class="cat-gif" alt="Happy cat">
+        </div>
+    </div>
+
+    <script>
+        let moveCount = 0;
+        const maxMoves = 20;
+        const btnNie = document.getElementById('btn-nie');
+
+        function moveButton() {
+            if (moveCount >= maxMoves) {
+                btnNie.style.display = 'none';
+                return;
+            }
+
+            // Obliczanie losowej pozycji
+            const x = Math.random() * (window.innerWidth - btnNie.offsetWidth);
+            const y = Math.random() * (window.innerHeight - btnNie.offsetHeight);
+
+            btnNie.style.position = 'fixed';
+            btnNie.style.left = x + 'px';
+            btnNie.style.top = y + 'px';
+
+            moveCount++;
+        }
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 2 + 3 + 's';
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }
+
+        function showLove() {
+            document.getElementById('success-screen').style.display = 'flex';
+            setInterval(createHeart, 150);
+        }
+    </script>
+</body>
+</html>
