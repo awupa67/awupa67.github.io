@@ -22,17 +22,18 @@
 
         #main-card {
             background: white;
-            padding: 40px;
+            padding: 30px 20px;
             border-radius: 30px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             z-index: 10;
-            max-width: 500px;
-            width: 90%;
+            max-width: 400px;
+            width: 85%;
         }
 
         h1 {
-            font-size: 2.5rem;
-            margin-bottom: 30px;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            line-height: 1.4;
         }
 
         .black-text { color: black; }
@@ -40,32 +41,35 @@
             color: #e53e3e; 
             font-family: 'Pacifico', cursive;
             display: block;
-            font-size: 3.5rem;
+            font-size: 2.2rem;
             margin-top: 10px;
         }
 
         .buttons {
             display: flex;
             justify-content: center;
-            gap: 20px;
-            margin-top: 20px;
+            align-items: center;
+            gap: 15px;
+            margin-top: 30px;
+            min-height: 60px;
             position: relative;
-            height: 60px;
         }
 
         button {
-            padding: 15px 35px;
-            font-size: 1.2rem;
+            padding: 12px 25px;
+            font-size: 1.1rem;
             border: none;
             border-radius: 50px;
             cursor: pointer;
             transition: transform 0.2s, background-color 0.2s;
             font-weight: bold;
+            touch-action: manipulation;
         }
 
         #btn-tak {
             background-color: #f687b3;
             color: white;
+            z-index: 11;
         }
 
         #btn-tak:hover {
@@ -76,7 +80,9 @@
         #btn-nie {
             background-color: #edf2f7;
             color: #4a5568;
-            position: absolute;
+            /* Na start przycisk jest w normalnym strumieniu (obok TAK) */
+            position: relative; 
+            z-index: 12;
         }
 
         /* Widok po kliknięciu TAK */
@@ -90,15 +96,17 @@
             background: white;
             z-index: 100;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-start;
             align-items: center;
             overflow-y: auto;
+            padding-top: 50px;
         }
 
         .cat-gif {
-            width: 250px;
-            border-radius: 20px;
-            margin: 10px;
+            width: 140px;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 15px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
@@ -108,6 +116,7 @@
             font-size: 20px;
             animation: float 3s linear infinite;
             z-index: 99;
+            pointer-events: none;
         }
 
         @keyframes float {
@@ -118,8 +127,16 @@
         .grid-cats {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin-top: 20px;
+            gap: 10px;
+            margin: 20px;
+            max-width: 320px;
+        }
+
+        @media (min-width: 600px) {
+            h1 { font-size: 2.2rem; }
+            .red-text { font-size: 3rem; }
+            .cat-gif { width: 200px; height: 200px; }
+            #main-card { max-width: 500px; }
         }
     </style>
 </head>
@@ -127,44 +144,56 @@
 
     <div id="main-card">
         <h1>
-            <span class="black-text">Wiktoria, czy zostaniesz mojom</span>
-            <span class="red-text">WALENTYNKOM?</span>
+            <span class="black-text">Wiktoria, czy zostaniesz moją</span>
+            <span class="red-text">WALENTYNKĄ?</span>
         </h1>
         <div class="buttons">
             <button id="btn-tak" onclick="showLove()">TAK!</button>
-            <button id="btn-nie" onmouseover="moveButton()" onclick="moveButton()">NIE</button>
+            <button id="btn-nie" onmouseover="moveButton()" ontouchstart="moveButton(event)">NIE</button>
         </div>
     </div>
 
     <div id="success-screen">
-        <h1 style="color: #ed64a6; font-family: 'Pacifico'; font-size: 3rem;">JEEEEEEJ! ❤️</h1>
-        <p style="font-size: 1.5rem; font-weight: bold;">Wiedziałem!</p>
+        <h1 style="color: #ed64a6; font-family: 'Pacifico'; font-size: 2.5rem; margin-bottom: 5px;">JEEEEEEJ! ❤️</h1>
+        <p style="font-size: 1.2rem; font-weight: bold; margin-bottom: 20px;">Wiedziałem!</p>
         <div class="grid-cats">
             <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJueGZ6bm93YXF6am90YnN6eXh6eXh6eXh6eXh6eXh6eXh6eCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/KzM1lAfJjEhcqA92Tr/giphy.gif" class="cat-gif" alt="Happy cat">
             <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJueGZ6bm93YXF6am90YnN6eXh6eXh6eXh6eXh6eXh6eXh6eCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/MDJ9IbxxvDUQM/giphy.gif" class="cat-gif" alt="Happy cat">
             <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNXJueGZ6bm93YXF6am90YnN6eXh6eXh6eXh6eXh6eXh6eXh6eCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/c6AyRE75O50e4/giphy.gif" class="cat-gif" alt="Happy cat">
-            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNXJueGZ6bm93YXF6am90YnN6eXh6eXh6eXh6eXh6eXh6eXh6eCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/11s7Ke7jkXwnaU/giphy.gif" class="cat-gif" alt="Happy cat">
+            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNXJueGZ6bm93YXF6am90YnN6eXh6eXh6eXh6eXh6eXh6eCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/11s7Ke7jkXwnaU/giphy.gif" class="cat-gif" alt="Happy cat">
         </div>
     </div>
 
     <script>
         let moveCount = 0;
-        const maxMoves = 20;
+        const maxMoves = 15;
         const btnNie = document.getElementById('btn-nie');
 
-        function moveButton() {
+        function moveButton(event) {
+            // Zapobiega domyślnym akcjom na telefonie (np. scrollowaniu)
+            if(event) event.preventDefault();
+
             if (moveCount >= maxMoves) {
                 btnNie.style.display = 'none';
                 return;
             }
 
-            // Obliczanie losowej pozycji
-            const x = Math.random() * (window.innerWidth - btnNie.offsetWidth);
-            const y = Math.random() * (window.innerHeight - btnNie.offsetHeight);
-
+            // Przełączamy na fixed przy pierwszym ruchu, żeby mógł latać wszędzie
             btnNie.style.position = 'fixed';
-            btnNie.style.left = x + 'px';
-            btnNie.style.top = y + 'px';
+
+            const padding = 20;
+            const btnWidth = btnNie.offsetWidth;
+            const btnHeight = btnNie.offsetHeight;
+            
+            // Obliczanie bezpiecznej pozycji (żeby nie wyszedł poza ekran)
+            const maxX = window.innerWidth - btnWidth - padding;
+            const maxY = window.innerHeight - btnHeight - padding;
+
+            const randomX = Math.max(padding, Math.floor(Math.random() * maxX));
+            const randomY = Math.max(padding, Math.floor(Math.random() * maxY));
+
+            btnNie.style.left = randomX + 'px';
+            btnNie.style.top = randomY + 'px';
 
             moveCount++;
         }
@@ -174,17 +203,19 @@
             heart.classList.add('heart');
             heart.innerHTML = '❤️';
             heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.animationDuration = Math.random() * 2 + 3 + 's';
+            heart.style.animationDuration = Math.random() * 2 + 2 + 's';
             document.body.appendChild(heart);
 
             setTimeout(() => {
                 heart.remove();
-            }, 5000);
+            }, 4000);
         }
 
         function showLove() {
             document.getElementById('success-screen').style.display = 'flex';
-            setInterval(createHeart, 150);
+            // Chowamy główną kartę
+            document.getElementById('main-card').style.display = 'none';
+            setInterval(createHeart, 200);
         }
     </script>
 </body>
