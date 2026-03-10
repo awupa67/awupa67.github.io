@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabela Mnożenia</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        table {
+            border-collapse: collapse;
+            margin: 0 auto;
+            background-color: #fff;
+        }
+        td, th {
+            border: 1px solid #000;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align:center;">Tabela Mnożenia 11x11</h1>
+
+    <script>
+        let table = new Array(11);
+        for(let i = 0; i < table.length; i++) {
+            table[i] = new Array(11); 
+        }
+        
+        for(let row = 0; row < table.length; row++) {
+            for(let col = 0; col < table[row].length; col++) {
+                table[row][col] = row * col;
+            }
+        }
+       
+        let tabelaHTML = "<table>";
+        
+        // opcjonalnie dodaj nagłówki wierszy i kolumn
+        tabelaHTML += "<tr><th>*</th>";
+        for(let col = 0; col < table[0].length; col++) {
+            tabelaHTML += "<th>" + col + "</th>";
+        }
+        tabelaHTML += "</tr>";
+
+        for(let row = 0; row < table.length; row++) {
+            tabelaHTML += "<tr>";
+            tabelaHTML += "<th>" + row + "</th>"; // nagłówek wiersza
+            for(let col = 0; col < table[row].length; col++) {
+                tabelaHTML += "<td>" + table[row][col] + "</td>";
+            }
+            tabelaHTML += "</tr>";
+        }
+        
+        tabelaHTML += "</table>";
+        
+        document.body.innerHTML += tabelaHTML;
+    </script>
+</body>
+</html>
