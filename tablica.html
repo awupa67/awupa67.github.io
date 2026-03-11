@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<title>Tablica asocjacyjna JS</title>
+</head>
+<body>
+
+<h2>Dane użytkownika</h2>
+
+<p id="wynik"></p>
+
+<script>
+
+// tablica asocjacyjna w JavaScript (obiekt)
+let tablica = {
+    imie: "Jan",
+    nazwisko: "Kowalski",
+    wiek: 25,
+    miasto: "Kraków"
+};
+
+// dostęp do wartości przez klucz
+let tekst = "Imię: " + tablica.imie + "<br>";
+tekst += "Nazwisko: " + tablica.nazwisko + "<br>";
+tekst += "Wiek: " + tablica["wiek"] + "<br>";
+tekst += "Miasto: " + tablica["miasto"];
+
+// wyświetlenie w HTML
+document.getElementById("wynik").innerHTML = tekst;
+
+</script>
+
+</body>
+</html>
