@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Array Manager z Drag & Drop</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+        background: #f0f0f0;
+    }
+    h1 { text-align: center; }
+    #controls { margin-bottom: 20px; text-align: center; }
+    input[type="text"] { padding: 8px; width: 200px; }
+    button { padding: 8px 12px; cursor: pointer; margin-left: 5px; }
+    #blockList { display: flex; flex-direction: column; gap: 10px; max-width: 400px; margin: auto; }
+    .block {
+        padding: 10px;
+        background: #4CAF50;
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-radius: 4px;
+        cursor: grab;
+    }
+    .block.dragging { opacity: 0.5; }
+    .block button { background: #f44336; border: none; border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<h1>Array Manager z Drag & Drop</h1>
+
+<div id="controls">
+    <input type="text" id="blockInput" placeholder="Wpisz nazwę bloku">
+    <button id="addBlockBtn">Dodaj blok</button>
+</div>
+
+<div id="blockList"></div>
+
+<script>
+const blocks = [];
+const blockInput = document.getElementById("blockInput");
+const addBlockBtn = document.getElementById("addBlockBtn");
+const blockList = document.getElementById("blockList");
+
+let dragSrcEl = null;
+
+function renderBlocks() {
+    blockList.innerHTML = "";
+    blocks.forEach((block, index) => {
+        const div = document.createElement("div");
+        div.className = "block";
+        div.draggable = true;
+        div.innerHTML = `<span>${block}</span><button onclick="removeBlock(${index})">Usuń</button>`;
+
+        div.addEventListener("dragstart", (e) => {
+            dragSrcEl = index;
+            div.classList.add("dragging");
+        });
+
+        div.addEventListener("dragend", (e) => {
+            div.classList.remove("dragging");
+        });
+
+        div.addEventListener("dragover", (e) => {
+            e.preventDefault();
+        });
+
+        div.addEventListener("drop", (e) => {
+            e.preventDefault();
+            const dragTarget = index;
+            if (dragSrcEl !== dragTarget) {
+                const movedBlock = blocks.splice(dragSrcEl, 1)[0];
+                blocks.splice(dragTarget, 0, movedBlock);
+                renderBlocks();
+            }
+        });
+
+        blockList.appendChild(div);
+    });
+}
+
+function addBlock() {
+    const value = blockInput.value.trim();
+    if (value) {
+        blocks.push(value);
+        blockInput.value = "";
+        renderBlocks();
+    }
+}
+
+function removeBlock(index) {
+    blocks.splice(index, 1);
+    renderBlocks();
+}
+
+addBlockBtn.addEventListener("click", addBlock);
+blockInput.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") addBlock();
+});
+
+</script>
+
+</body>
+</html>
